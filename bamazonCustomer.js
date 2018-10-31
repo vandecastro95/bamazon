@@ -76,6 +76,11 @@ function promptCustomer(res) {
                     function(err, res2) {
                       if (err) throw err;
                       console.log("Products bought for $" + (element.price * answer.howmany));
+                      connection.query("SELECT * FROM products WHERE ?", {
+                        product_name: element.product_name
+                      }, function(err3, res3) {
+                        console.log("Stocks remaining: " + res3[0].stock_quantity)
+                      })
 
                       connection.end();
                     }
